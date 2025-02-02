@@ -1,60 +1,162 @@
-body{
-  background: linear-gradient(135deg, #F8C8DC, #F4A988, #5C374C);
+/* Global Styles */
+body {
+  background: linear-gradient(135deg, #1e1e2f, #3b3b58);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: white;
 }
 
-.nav-bar{
+/* Navbar */
+.nav-bar {
   display: flex;
   justify-content: space-between;
-  background-color: #E64398;
-  padding: 10px;
+  align-items: center;
+  background-color: #8e44ad;
+  padding: 12px 20px;
   color: white;
-  border: 2px solid #5C374C;
-}
-.brand{
-  font-weight: bolder;
-  width: 20%;
-  text-align: center;
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: white;
+  border-bottom: 3px solid #5b2c6f;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
 }
 
-.search-bar{
+.nav-bar:hover {
+  background-color: #732d91;
+}
+
+.brand, .cart {
+  font-weight: bold;
+  font-size: 1.7rem;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease-in-out;
+}
+
+.brand:hover, .cart:hover {
+  transform: scale(1.1);
+}
+
+/* Search Bar */
+.search-bar {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
   width: 60%;
-}
-
-.search-bar input{
-  width: 55%;
-  /* text-align:center; */
-}
-input::placeholder{
   padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #5b2c6f;
+  border-radius: 25px;
+  outline: none;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.search-bar input:focus {
+  box-shadow: 0px 0px 10px rgba(142, 68, 173, 0.8);
+}
+
+input::placeholder {
   font-weight: bold;
+  color: #d3d3d3;
 }
 
-.cart{
-  width: 20%;
-  text-align: center;
-  font-weight: bolder;
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: white;
-}
-
-.nav-bar-wrapper{
+/* Navigation Bar Wrapper */
+.nav-bar-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  gap: 20px;
   padding: 15px;
-  background-color: #F172A1;
+  background-color: #9b59b6;
   color: white;
   font-weight: bold;
-  border-left: 2px solid #5C374C;
-  border-right: 2px solid #5C374C;
-  border-bottom: 2px solid #5C374C;
+  border-bottom: 3px solid #5b2c6f;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.nav-bar-wrapper .items{
+.nav-bar-wrapper .items {
   cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-bar-wrapper .items:hover {
+  transform: scale(1.1);
+  color: #fff8dc;
+}
+
+
+.con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 20px; 
+}
+
+
+
+/* Product Cards */
+.product-card {
+  background: linear-gradient(135deg, #2c2c3e, #4e4e69);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  width: 280px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  color: #f8c471;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #d3d3d3;
+  margin-bottom: 12px;
+}
+
+/* Buttons */
+button {
+  background-color: #8e44ad;
+  border: none;
+  padding: 12px 18px;
+  font-size: 1rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #732d91;
+  transform: scale(1.1);
 }
 
 .img{
@@ -66,11 +168,23 @@ input::placeholder{
 .img img{
   width: 350px;
   height: 350px;
+  border: 2px solid brown;
+  border-radius: 5px;
 }
 
-.con{
+.cart-container{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap:4rem
+  gap: 3rem;
+  flex-wrap: wrap;
+  padding: 20px;
 }
+
+.cart-container img{
+  width: 350px;
+  height: 350px;
+  border: 2px solid brown;
+  border-radius: 5px;
+}
+

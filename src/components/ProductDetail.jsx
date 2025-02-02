@@ -7,62 +7,51 @@ import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetail = ({ cart, setCart }) => {
   const { id } = useParams();
-
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    const filterProduct = items.filter((prodcut) => prodcut.id == id);
-    //  console.log(filterProduct)
-    setProduct(filterProduct[0]);
+    // Find the selected product
+    const selectedProduct = items.find((prod) => prod.id == id);
 
-    const relatedProducts = items.filter(
-      (p) => p.category === product.category
-    );
+    // If product exists, set it
+    if (selectedProduct) {
+      setProduct(selectedProduct);
 
-    // console.log("RelatedProduct = ",relatedProducts)
-    setRelatedProducts(relatedProducts);
-  }, [id, product.category]);
+      // Find related products by category
+      const related = items.filter((p) => p.category === selectedProduct.category && p.id !== selectedProduct.id);
+      setRelatedProducts(related);
+    } else {
+      setProduct(null); // If no product is found
+      setRelatedProducts([]);
+    }
+  }, [id]);
 
   const addToCart = (id, price, title, description, imgSrc) => {
-    const obj = {
-      id,
-      price,
-      title,
-      description,
-      imgSrc,
-    };
-    setCart([...cart, obj]);
-    console.log("Cart element = ", cart);
-    toast.success("Item added on cart", {
+    const obj = { id, price, title, description, imgSrc };
+    setCart((prevCart) => [...prevCart, obj]); 
+
+    toast.success("Item added to cart", {
       position: "top-right",
       autoClose: 1500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
       theme: "dark",
     });
   };
 
+  if (!product) {
+    return <h2 className="text-center">Product not found</h2>;
+  }
+
   return (
     <>
-      <ToastContainer
-        position="top-right"
-        autoClose={1500}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
+      <ToastContainer />
       <div className="container con">
         <div className="img">
-          <img src={product.imgSrc} alt="" />
+          <img src={product.imgSrc} alt={product.title} />
         </div>
         <div className="text-center">
           <h1 className="card-title">{product.title}</h1>
@@ -70,13 +59,7 @@ const ProductDetail = ({ cart, setCart }) => {
           <button className="btn btn-primary mx-3">{product.price} ₹</button>
           <button
             onClick={() =>
-              addToCart(
-                product.id,
-                product.price,
-                product.title,
-                product.description,
-                product.imgSrc
-              )
+              addToCart(product.id, product.price, product.title, product.description, product.imgSrc)
             }
             className="btn btn-warning"
           >

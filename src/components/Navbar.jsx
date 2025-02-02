@@ -22,11 +22,20 @@ const Navbar = ({setData,cart}) => {
     setData(element)
   }
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/${searchTerm}`)
-    setSearchTerm("")
-  }
+    const term = searchTerm.toLowerCase(); // Convert search term to lowercase
+  
+    const filteredItems = items.filter((product) =>
+      (product.category && product.category.toLowerCase().includes(term)) || // Check category existence
+      (product.name && product.name.toLowerCase().includes(term))           // Check name existence
+    );
+  
+    setData(filteredItems);
+    navigate(`/search/${searchTerm}`);
+    setSearchTerm("");
+  };
+  
 
 
   return (
@@ -48,7 +57,7 @@ const Navbar = ({setData,cart}) => {
             </form>
 
 
-            <Link to={'/cart'} className="cart">
+            <Link to='/cart' className="cart">
             <button type="button" className="btn btn-primary position-relative">
   <BsFillCartCheckFill style={{fontSize:'1.5rem'}} />
   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
